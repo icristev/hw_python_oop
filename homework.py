@@ -94,26 +94,26 @@ class Swimming(Training):
     RATIO_2: ClassVar[float] = 2
 
     def get_spent_calories(self) -> float:
-        return((self.get_mean_speed() + self.RATIO_1) * self.RATIO_2
-               * self.weight)
+        return ((self.get_mean_speed() + self.RATIO_1) * self.RATIO_2
+                * self.weight)
 
     def get_mean_speed(self) -> float:
-        return(self.length_pool
-               * self.count_pool
-               / self.M_IN_KM
-               / self.duration)
+        return (self.length_pool
+                * self.count_pool
+                / self.M_IN_KM
+                / self.duration)
 
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    dictionary = {
+    TypeTrainingDict = {
         'SWM': Swimming,
         'RUN': Running,
         'WLK': SportsWalking,
     }
 
-    if workout_type in dictionary:
-        return dictionary.get(workout_type)(*data)
+    if workout_type in TypeTrainingDict:
+        return TypeTrainingDict.get(workout_type)(*data)
     raise KeyError(f"'{workout_type}' - данный тип тренировки не подходит")
 
 
